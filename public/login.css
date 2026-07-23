@@ -1,0 +1,531 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:ariel,sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+    linear-gradient(rgba(0,0,0,.25),
+    rgba(0,0,0,.25)),
+    url("login.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+}
+
+.container{
+
+    width:1150px;
+
+    height:700px;
+
+    display:grid;
+
+    grid-template-columns:45% 55%;
+
+    border-radius:25px;
+
+    overflow:hidden;
+}
+/* Login Message */
+
+#login-message{
+
+    text-align:center;
+
+    margin:15px 0;
+
+    min-height:20px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+/*leftside---------8*/
+.left-grid{
+
+    background:
+    linear-gradient(rgba(15,40,90,.45),
+    rgba(15,40,90,.45)),
+    url("images/login-bg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:50px;
+
+    color:white;
+
+}
+
+.left-grid h1{
+
+    font-size:58px;
+
+    line-height:70px;
+
+    font-weight:700;
+
+}
+
+.line{
+
+    width:80px;
+
+    height:3px;
+
+    background:white;
+
+    border-radius:10px;
+
+    margin:30px auto;
+
+}
+
+.left-grid p{
+
+    font-size:22px;
+
+    font-weight:300;
+
+}
+
+/* right-side */
+
+.right-grid{
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.login-card{
+
+    width:75%;
+
+}
+
+.user-icon{
+
+    width:95px;
+
+    height:95px;
+
+    border:3px solid #2563EB;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:auto;
+
+    color:#2563EB;
+
+    font-size:42px;
+
+}
+
+.login-card h1{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#0F172A;
+
+    font-size:60px;
+
+}
+
+.login-card p{
+
+    text-align:center;
+
+    color:#64748B;
+
+    margin-top:10px;
+
+    margin-bottom:45px;
+
+    font-size:20px;
+
+}
+
+.input-box{
+
+
+    margin-bottom:28px;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    padding:18px 60px;
+
+    border:1px solid #D6DCE5;
+
+    border-radius:15px;
+
+    outline:none;
+
+    font-size:18px;
+
+}
+
+.options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+.options label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#64748B;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+}
+
+.options input{
+
+    width:18px;
+
+    height:18px;
+
+    cursor:pointer;
+
+}
+
+.options a{
+
+    text-decoration:none;
+
+    color:#2563EB;
+
+    font-weight:500;
+
+}
+.login-btn{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:blue;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+    gap:10px;
+
+    transition:.35s;
+
+}
+
+.login-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.otherpart{
+
+    margin:35px 0;
+    text-align:center;
+
+}
+
+.otherpart span{
+
+    background:white;
+
+    padding:0 18px;
+
+    color:#64748B;
+
+
+
+}
+
+.register{
+
+    text-align:center;
+
+    color:#64748B;
+
+    margin-bottom:25px;
+
+}
+
+.register a{
+
+    text-decoration:none;
+
+    color:#2563EB;
+
+    font-weight:600;
+
+}
+
+.register a:hover{
+
+    color:#1D4ED8;
+
+}
+
+.home{
+
+    text-align:center;
+
+}
+
+.home a{
+
+    text-decoration:none;
+
+    color:#475569;
+
+    transition:.3s;
+
+}
+
+.home a:hover{
+
+    color:#2563EB;
+
+}
+/* ========================================= */
+/* RESPONSIVE DESIGN */
+/* ========================================= */
+
+/* ---------- Large Tablets & Small Laptops ---------- */
+
+@media (max-width:992px){
+
+    body{
+        padding:30px;
+    }
+
+    .container{
+        width:100%;
+        height:auto;
+    }
+
+    .left-grid{
+        padding:40px;
+    }
+
+    .left-grid h1{
+        font-size:46px;
+        line-height:58px;
+    }
+
+    .left-grid p{
+        font-size:18px;
+    }
+
+    .login-card{
+        width:85%;
+    }
+
+    .login-card h1{
+        font-size:50px;
+    }
+
+}
+
+
+/* ---------- Tablets ---------- */
+
+@media (max-width:768px){
+
+    body{
+        padding:25px;
+        align-items:flex-start;
+    }
+
+    .container{
+        width:100%;
+        height:auto;
+        grid-template-columns:1fr;
+    }
+
+    .left-grid{
+        min-height:280px;
+        padding:40px 30px;
+    }
+
+    .left-grid h1{
+        font-size:42px;
+        line-height:52px;
+    }
+
+    .left-grid p{
+        font-size:18px;
+    }
+
+    .right-grid{
+        padding:45px 0;
+    }
+
+    .login-card{
+        width:90%;
+    }
+
+    .login-card h1{
+        font-size:48px;
+    }
+
+    .login-card p{
+        font-size:18px;
+    }
+
+}
+
+
+/* ---------- Mobile Phones ---------- */
+
+@media (max-width:576px){
+
+    body{
+        padding:15px;
+    }
+
+    .container{
+        border-radius:15px;
+    }
+
+    .left-grid{
+        min-height:220px;
+        padding:30px 20px;
+    }
+
+    .left-grid h1{
+        font-size:32px;
+        line-height:42px;
+    }
+
+    .left-grid p{
+        font-size:16px;
+    }
+
+    .line{
+        margin:20px auto;
+    }
+
+    .right-grid{
+        padding:35px 0;
+    }
+
+    .login-card{
+        width:90%;
+    }
+
+    .user-icon{
+        width:75px;
+        height:75px;
+        font-size:34px;
+    }
+
+    .login-card h1{
+        font-size:36px;
+    }
+
+    .login-card p{
+        font-size:16px;
+        margin-bottom:30px;
+    }
+
+    .input-box{
+        margin-bottom:20px;
+    }
+
+    .input-box input{
+        padding:15px 20px;
+        font-size:16px;
+    }
+
+    .options{
+        flex-direction:column;
+        gap:15px;
+        align-items:flex-start;
+    }
+
+    .login-btn{
+        padding:16px;
+        font-size:16px;
+    }
+
+    .otherpart{
+        margin:25px 0;
+    }
+
+    .register{
+        font-size:15px;
+    }
+
+    .home{
+        font-size:15px;
+    }
+
+}
