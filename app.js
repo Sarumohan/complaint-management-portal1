@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const connectDB = require("./config/db");
+const connectDB = require("./connection/db");
 const userRoute = require("./routes/user");
 const complaintRoute = require("./routes/Complaint");
 
@@ -10,7 +10,7 @@ const PORT = 6990;
 
 connectDB();
 
-// Middlewares
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

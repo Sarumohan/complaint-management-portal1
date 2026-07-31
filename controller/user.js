@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-// Get All Users
+
 const getAllUsers = async (req, res) => {
 
     try {
@@ -20,7 +20,7 @@ const getAllUsers = async (req, res) => {
 
 };
 
-// Get User By ID
+
 const getUserById = async (req, res) => {
 
     try {
@@ -47,12 +47,11 @@ const getUserById = async (req, res) => {
 
 };
 
-// Register User
 const registerUser = async (req, res) => {
 
     try {
 
-        // Check if email already exists
+        
         const existingUser = await User.findOne({
             email: req.body.email
         });
@@ -65,13 +64,13 @@ const registerUser = async (req, res) => {
 
         }
 
-        // Hash password
+        
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-        // Replace plain password with hashed password
+        
         req.body.password = hashedPassword;
 
-        // Create user
+       
         const user = await User.create(req.body);
 
         res.status(201).json({
@@ -89,7 +88,7 @@ const registerUser = async (req, res) => {
 
 };
 
-// Login User
+
 const loginUser = async (req, res) => {
 
     try {

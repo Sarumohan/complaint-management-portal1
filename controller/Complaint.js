@@ -1,6 +1,6 @@
 const Complaint = require("../models/Complaint");
 
-// Get all complaints
+
 const getAllComplaints = async (req, res) => {
     try {
         const complaints = await Complaint.find();
@@ -10,7 +10,7 @@ const getAllComplaints = async (req, res) => {
     }
 };
 
-// Get complaint by ID
+
 const getComplaintById = async (req, res) => {
     try {
         const complaint = await Complaint.findById(req.params.id);
@@ -28,12 +28,12 @@ const getComplaintById = async (req, res) => {
     }
 };
 
-// Create complaint
+
 const createComplaint = async (req, res) => {
 
     try {
 
-        // If a photo was uploaded, save its filename
+       
         if (req.file) {
             req.body.photo = req.file.filename;
         }
@@ -55,7 +55,7 @@ const createComplaint = async (req, res) => {
 
 };
 
-// Update complaint
+
 const updateComplaint = async (req, res) => {
     try {
         const complaint = await Complaint.findByIdAndUpdate(
@@ -80,7 +80,7 @@ const updateComplaint = async (req, res) => {
     }
 };
 
-// Delete complaint
+// Delete 
 const deleteComplaint = async (req, res) => {
     try {
         const complaint = await Complaint.findByIdAndDelete(req.params.id);

@@ -8,16 +8,15 @@ const {
     loginUser
 } = require("../controller/user");
 
-// Get all users
+
 router.get("/", getAllUsers);
 
-// Get user by ID
+
 router.get("/:id", getUserById);
 
-// Register user
+
 router.post("/register", registerUser);
 
-// Login user
 router.post("/login", loginUser);
 
 module.exports = router;
