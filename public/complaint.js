@@ -37,6 +37,7 @@ const category = document.getElementById("category");
 const title = document.getElementById("complaint-title");
 const description = document.getElementById("description");
 const locationInput = document.getElementById("location");
+const photo = document.getElementById("photo");
 
 const priority = document.getElementsByName("priority");
 
@@ -89,24 +90,25 @@ form.addEventListener("submit", async function (e) {
         return;
     }
 
-    const complaintData = {
-        userId: loggedInUser._id,
-        department: department.value,
-        category: category.value,
-        title: title.value,
-        description: description.value,
-        location: locationInput.value,
-        priority: selectedPriority
-    };
+    const formData = new FormData();
+
+    formData.append("userId", loggedInUser._id);
+    formData.append("department", department.value);
+    formData.append("category", category.value);
+    formData.append("title", title.value);
+    formData.append("description", description.value);
+    formData.append("location", locationInput.value);
+    formData.append("priority", selectedPriority);
+
+    if (photo.files.length > 0) {
+        formData.append("photo", photo.files[0]);
+    }
 
     try {
 
         const response = await fetch("/complaints", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(complaintData)
+            body: formData
         });
 
         const data = await response.json();

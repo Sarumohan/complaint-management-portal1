@@ -1,4 +1,4 @@
-// Get form elements
+
 const registerForm = document.getElementById("register-form");
 
 const fullName = document.getElementById("full-name");
@@ -11,21 +11,22 @@ const terms = document.getElementById("terms");
 const message = document.getElementById("register-message");
 
 
-registerForm.addEventListener("submit", function (e) {
+
+registerForm.addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
     message.innerHTML = "";
     message.style.color = "red";
 
-    
     const nameValue = fullName.value.trim();
     const emailValue = email.value.trim().toLowerCase();
     const phoneValue = phone.value.trim();
     const passwordValue = password.value;
     const confirmValue = confirmPassword.value;
 
-    
+    // Validation
+
     if (
         nameValue === "" ||
         emailValue === "" ||
@@ -33,50 +34,54 @@ registerForm.addEventListener("submit", function (e) {
         passwordValue === "" ||
         confirmValue === ""
     ) {
+
         message.innerHTML = "Please fill all fields.";
         return;
+
     }
 
-    
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(emailValue)) {
-        message.innerHTML = "Enter a valid email address.";
+
+        message.innerHTML = "Enter a valid email.";
         return;
+
     }
 
-    
     const phonePattern = /^[0-9]{10}$/;
 
     if (!phonePattern.test(phoneValue)) {
+
         message.innerHTML = "Phone number must contain exactly 10 digits.";
         return;
+
     }
 
-    
     if (passwordValue.length < 6) {
+
         message.innerHTML = "Password must be at least 6 characters.";
         return;
+
     }
 
-    
     if (passwordValue !== confirmValue) {
+
         message.innerHTML = "Passwords do not match.";
         return;
+
     }
 
-    
     if (!terms.checked) {
+
         message.innerHTML = "Please accept the Terms & Conditions.";
         return;
+
     }
 
-    
-    
-    t
-    const newUser = {
+    // User Object
 
-        id: Date.now(),
+    const newUser = {
 
         fullName: nameValue,
 
@@ -92,25 +97,50 @@ registerForm.addEventListener("submit", function (e) {
 
     };
 
-   
+    try {
 
-    fetch("/users/register", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newUser)
-    });
+        const response = await fetch("/users/register", {
 
-    message.style.color = "green";
-    message.innerHTML = "Registration successful! Redirecting...";
+            method: "POST",
 
-    registerForm.reset();
+            headers: {
 
-    setTimeout(() => {
+                "Content-Type": "application/json"
 
-        window.location.href = "login.html";
+            },
 
-    }, 2000);
+            body: JSON.stringify(newUser)
+
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            message.innerHTML = data.message;
+            return;
+
+        }
+
+        message.style.color = "green";
+        message.innerHTML = data.message;
+
+        registerForm.reset();
+
+        setTimeout(() => {
+
+            window.location.href = "login.html";
+
+        }, 2000);
+
+    }
+
+    catch (error) {
+
+        console.log(error);
+
+        message.innerHTML = "Server Error.";
+
+    }
 
 });

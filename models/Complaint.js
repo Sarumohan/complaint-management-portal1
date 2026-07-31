@@ -37,12 +37,17 @@ const complaintSchema = new mongoose.Schema({
         enum: ["Low", "Medium", "High"],
         default: "Medium"
     },
+    photo: {
+     type: String
+    },
+
 
     status: {
         type: String,
         enum: ["Pending", "In Progress", "Resolved"],
         default: "Pending"
     }
+    
 
 }, { timestamps: true });
 

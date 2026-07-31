@@ -30,7 +30,14 @@ const getComplaintById = async (req, res) => {
 
 // Create complaint
 const createComplaint = async (req, res) => {
+
     try {
+
+        // If a photo was uploaded, save its filename
+        if (req.file) {
+            req.body.photo = req.file.filename;
+        }
+
         const complaint = await Complaint.create(req.body);
 
         res.status(201).json({
@@ -39,8 +46,13 @@ const createComplaint = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+
+        res.status(500).json({
+            message: error.message
+        });
+
     }
+
 };
 
 // Update complaint
