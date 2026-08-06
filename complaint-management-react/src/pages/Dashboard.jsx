@@ -17,7 +17,7 @@ function Dashboard() {
         try {
 
             const response = await fetch(
-                `http://localhost:6990/complaints/user/${user._id}`
+                 `https://complaint-management-backend-xocq.onrender.com/complaints/user/${user._id}`
             );
 
             if (!response.ok) {

@@ -64,17 +64,11 @@ function Complaint() {
         try {
 
             const response = await fetch(
-
-                "http://localhost:6990/complaints",
-
+                "https://complaint-management-backend-xocq.onrender.com/complaints",
                 {
-
-                    method: "POST",
-
-                    body: formData
-
+                     method: "POST",
+                      body: formData
                 }
-
             );
 
             const data = await response.json();
