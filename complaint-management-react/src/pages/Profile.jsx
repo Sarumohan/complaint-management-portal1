@@ -65,7 +65,7 @@ function Profile() {
 
         const response = await fetch(
 
-            `http://localhost:6990/users/${loggedUser._id}`
+            `https://complaint-management-backend-xocq.onrender.com/users/${loggedUser._id}`
 
         );
 
@@ -188,11 +188,11 @@ function Profile() {
 
         const response = await fetch(
 
-            `http://localhost:6990/users/${loggedUser._id}`,
+        `https://complaint-management-backend-xocq.onrender.com/users/profile/${loggedUser._id}`,
 
             {
 
-                method: "PATCH",
+                method: "PUT",
 
                 body: formData
 
@@ -269,7 +269,7 @@ function Profile() {
 
                         <img
 
-                            src={`http://localhost:6990/uploads/${profilePhoto}`}
+                           src={`https://complaint-management-backend-xocq.onrender.com/uploads/${profilePhoto}`}
 
                             alt="Profile"
 
