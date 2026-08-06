@@ -2,12 +2,14 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Complaint from "./pages/Complaint";
 import Track from "./pages/Track";
 import History from "./pages/History";
 import Profile from "./pages/Profile";
 import Notification from "./pages/Notification";
+
 
 function App() {
 
@@ -18,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
             <Route path="/dashboard" element={<Dashboard />} />
 
@@ -26,6 +29,7 @@ function App() {
             <Route path="/history" element={<History />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/notification" element={<Notification />} />
+
 
         </Routes>
 

@@ -11,7 +11,7 @@ function Register() {
 
     const [formData, setFormData] = useState({
 
-        fullname: "",
+        fullName: "",
         email: "",
         phone: "",
         password: "",
@@ -47,7 +47,7 @@ function Register() {
 
         if(
 
-            !formData.fullname ||
+            !formData.fullName ||
             !formData.email ||
             !formData.phone ||
             !formData.password ||
@@ -81,7 +81,7 @@ function Register() {
 
             const response = await registerUser({
 
-                fullname: formData.fullname,
+                fullName: formData.fullName,
 
                 email: formData.email.toLowerCase(),
 
@@ -167,11 +167,11 @@ function Register() {
 
                             type="text"
 
-                            name="fullname"
+                            name="fullName"
 
                             placeholder="Full Name"
 
-                            value={formData.fullname}
+                            value={formData.fullName}
 
                             onChange={handleChange}
 
