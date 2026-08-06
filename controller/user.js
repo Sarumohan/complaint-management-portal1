@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const upload = require("../connection/multer");
 
 
 const getAllUsers = async (req, res) => {
@@ -132,10 +133,63 @@ const loginUser = async (req, res) => {
     }
 
 };
+const updateUser = async (req, res) => {
+
+    try {
+        
+
+        if (req.file) {
+
+            req.body.profilePhoto = req.file.filename;
+
+        }
+
+        const user = await User.findByIdAndUpdate(
+
+            req.params.id,
+
+            req.body,
+
+            { new: true }
+
+        );
+
+        if (!user) {
+
+            return res.status(404).json({
+
+                message: "User not found"
+
+            });
+
+        }
+
+        res.status(200).json({
+
+            message: "Profile Updated Successfully",
+
+            user
+
+        });
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            message: error.message
+
+        });
+
+    }
+
+};
 
 module.exports = {
     getAllUsers,
     getUserById,
     registerUser,
-    loginUser
+    loginUser,
+    updateUser
 };
