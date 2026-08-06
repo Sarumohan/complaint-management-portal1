@@ -1,7 +1,5 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const upload = require("../connection/multer");
-
 
 const getAllUsers = async (req, res) => {
 
@@ -20,7 +18,6 @@ const getAllUsers = async (req, res) => {
     }
 
 };
-
 
 const getUserById = async (req, res) => {
 
@@ -52,7 +49,6 @@ const registerUser = async (req, res) => {
 
     try {
 
-        
         const existingUser = await User.findOne({
             email: req.body.email
         });
@@ -65,13 +61,10 @@ const registerUser = async (req, res) => {
 
         }
 
-        
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-        
         req.body.password = hashedPassword;
 
-       
         const user = await User.create(req.body);
 
         res.status(201).json({
@@ -88,7 +81,6 @@ const registerUser = async (req, res) => {
     }
 
 };
-
 
 const loginUser = async (req, res) => {
 
@@ -133,10 +125,10 @@ const loginUser = async (req, res) => {
     }
 
 };
-const updateUser = async (req, res) => {
+
+const updateProfile = async (req, res) => {
 
     try {
-        
 
         if (req.file) {
 
@@ -191,5 +183,5 @@ module.exports = {
     getUserById,
     registerUser,
     loginUser,
-    updateUser
+    updateProfile
 };

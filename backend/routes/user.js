@@ -1,19 +1,18 @@
-console.log("user.js loaded");
 const express = require("express");
-const router = express.Router();
-
-const upload = require("../connection/multer");
 
 const {
-
     getAllUsers,
     getUserById,
     registerUser,
     loginUser,
-    updateUser
-
+    updateProfile
 } = require("../controller/user");
 
+const upload = require("../connection/multer");
+
+const router = express.Router();
+
+console.log("user.js loaded");
 
 router.get("/", getAllUsers);
 
@@ -23,14 +22,10 @@ router.post("/register", registerUser);
 
 router.post("/login", loginUser);
 
-router.patch(
-
-    "/:id",
-
+router.put(
+    "/profile/:id",
     upload.single("profilePhoto"),
-
-    updateUser
-
+    updateProfile
 );
 
 module.exports = router;

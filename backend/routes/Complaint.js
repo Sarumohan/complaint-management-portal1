@@ -12,18 +12,13 @@ const {
     getUserComplaints
 } = require("../controller/Complaint");
 
-
 router.get("/", getAllComplaints);
-
 
 router.get("/user/:userId", getUserComplaints);
 
-
 router.get("/:id", getComplaintById);
 
-
 router.post("/", upload.single("photo"), createComplaint);
-
 
 router.patch("/:id", updateComplaint);
 
