@@ -2,7 +2,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:ariel ,sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 html{
@@ -15,13 +15,11 @@ body{
 }
 
 .section1{
-
     width:100%;
     min-height:100vh;
 
     background:
-    linear-gradient(rgba(0,0,0,.60),
-    rgba(0,0,0,.60)),
+    linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
     url("/home.png");
 
     background-size:cover;
@@ -46,7 +44,6 @@ nav{
     position:fixed;
 
     top:0;
-
     left:0;
 
     z-index:1000;
@@ -67,8 +64,8 @@ nav{
 
 .logo .icon{
 
-    height:45px;
     width:45px;
+    height:45px;
     object-fit:contain;
 
 }
@@ -109,7 +106,7 @@ nav ul li a{
 
 nav ul li a:hover{
 
-    color:blue;
+    color:#3B82F6;
 
 }
 
@@ -124,33 +121,41 @@ nav ul li a:hover{
 .login,
 .register{
 
-    display:inline-block;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:170px;
+
+    height:50px;
 
     text-decoration:none;
 
-    text-align:center;
+    border-radius:8px;
+
+    font-size:18px;
+
+    font-weight:600;
 
     transition:.3s;
-
-    border-radius:6px;
-
-    font-weight:500;
 
 }
 
 .login{
 
-    padding:10px 24px;
-
     border:2px solid white;
 
     color:white;
+
+    background:transparent;
 
 }
 
 .login:hover{
 
-    background:rgb(204, 213, 226);
+    background:white;
 
     color:#2563EB;
 
@@ -158,18 +163,19 @@ nav ul li a:hover{
 
 .register{
 
-     padding:10px 24px;
-
     border:2px solid white;
 
-    color:rgb(43, 19, 161);
+    background:white;
 
+    color:#2563EB;
 
 }
 
 .register:hover{
 
-    background:#1D4ED8;
+    background:#2563EB;
+
+    color:white;
 
 }
 
@@ -180,6 +186,7 @@ nav ul li a:hover{
     padding-top:180px;
 
     margin-left:8%;
+
     color:white;
 
 }
@@ -319,8 +326,6 @@ nav ul li a:hover{
 
 }
 
-/* WHY US */
-
 .why-us{
 
     padding:100px 8%;
@@ -381,7 +386,7 @@ nav ul li a:hover{
 
 .feature-grid:hover{
 
-    transform:translateY(-19px);
+    transform:translateY(-15px);
 
 }
 
@@ -400,8 +405,6 @@ nav ul li a:hover{
     line-height:28px;
 
 }
-
-/* HOW IT WORKS */
 
 .how-it-works{
 
@@ -443,13 +446,11 @@ nav ul li a:hover{
 
     transition:.4s;
 
-    position:relative;
-
 }
 
 .step:hover{
 
-    transform:translateY(-18px);
+    transform:translateY(-15px);
 
 }
 
@@ -471,19 +472,17 @@ nav ul li a:hover{
 
     align-items:center;
 
-    font-size:28px;
-
     margin:auto;
 
     margin-bottom:25px;
+
+    font-size:28px;
 
     font-weight:bold;
 
 }
 
 .step h3{
-
-    color:#1F2937;
 
     margin-bottom:15px;
 
@@ -496,8 +495,6 @@ nav ul li a:hover{
     line-height:28px;
 
 }
-
-/* FOOTER */
 
 footer{
 
@@ -525,201 +522,248 @@ footer p{
 
     line-height:30px;
 
-    margin-bottom:10px;
-
 }
 
-/* RESPONSIVE DESIGN */
-
-@media (max-width:992px){
+@media(max-width:992px){
 
     .content h1{
+
         font-size:55px;
+
         line-height:65px;
+
     }
 
     .content p{
+
         width:100%;
+
     }
 
     .blur-card{
+
         width:90%;
+
     }
 
 }
 
-@media (max-width:768px){
+@media(max-width:768px){
 
     nav{
+
         flex-direction:column;
+
         gap:20px;
+
         position:static;
+
         padding:20px 5%;
+
     }
 
     nav ul{
+
+        display:flex;
+
         flex-wrap:wrap;
+
         justify-content:center;
-        gap:20px;
+
+        gap:18px;
+
     }
 
     .nav-buttons{
+
+        display:flex;
+
         justify-content:center;
+
+        gap:15px;
+
         flex-wrap:wrap;
+
     }
 
     .section1 .content{
+
         width:90%;
-        margin:0 auto;
-        padding-top:70px;
+
+        margin:auto;
+
+        padding-top:60px;
+
         text-align:center;
+
     }
 
     .content h1{
+
         font-size:48px;
+
         line-height:60px;
+
     }
 
     .content p{
+
         width:100%;
+
         font-size:18px;
+
         line-height:30px;
+
     }
 
     .content-buttons{
+
         justify-content:center;
+
         flex-wrap:wrap;
+
     }
 
     .blur-card{
+
         width:90%;
+
         flex-direction:column;
-        gap:35px;
-        padding:30px;
+
+        gap:30px;
+
     }
 
-    .why-us{
-        padding:80px 5%;
-    }
-
-    .why-us > p{
-        width:100%;
-    }
-
+    .why-us,
     .how-it-works{
+
         padding:80px 5%;
+
+    }
+
+    .why-us>p{
+
+        width:100%;
+
     }
 
 }
 
-@media (max-width:576px){
+@media(max-width:576px){
 
     .logo{
-        flex-direction:column;
-        text-align:center;
-    }
 
-    .logo .icon{
-        width:40px;
-        height:40px;
+        flex-direction:column;
+
+        text-align:center;
+
     }
 
     .logo h2{
+
         font-size:22px;
+
     }
 
     nav ul{
-        flex-direction:column;
-        align-items:center;
+
+        display:flex;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
         gap:15px;
+
     }
 
     .nav-buttons{
-        width:100%;
+
+        display:flex;
+
         flex-direction:column;
+
         align-items:center;
+
+        gap:15px;
+
+        width:100%;
+
     }
 
     .login,
     .register{
-        width:180px;
+
+        width:220px;
+
+        height:50px;
+
     }
 
     .section1 .content{
+
         width:92%;
-        padding-top:60px;
+
+        padding-top:50px;
+
     }
 
     .content h1{
-        font-size:36px;
-        line-height:46px;
+
+        font-size:38px;
+
+        line-height:48px;
+
     }
 
     .content p{
-        width:100%;
+
         font-size:17px;
+
         line-height:28px;
+
     }
 
     .content-buttons{
+
         flex-direction:column;
-        gap:15px;
+
     }
 
     .primary-btn,
     .secondary-btn{
+
         width:100%;
+
         text-align:center;
+
     }
 
     .blur-card{
+
         width:92%;
+
         padding:25px;
+
     }
 
     .stat h3{
-        font-size:30px;
-    }
 
-    .stat p{
-        font-size:16px;
+        font-size:30px;
+
     }
 
     .why-us h2,
     .how-it-works h2{
+
         font-size:30px;
-    }
 
-    .why-us > p{
-        font-size:16px;
-        line-height:28px;
-    }
-
-    .feature-grid{
-        padding:30px 20px;
-    }
-
-    .step{
-        padding:30px 20px;
-    }
-
-    .step span{
-        width:60px;
-        height:60px;
-        font-size:24px;
     }
 
     footer{
+
         padding:40px 5%;
-    }
 
-    footer h2{
-        font-size:24px;
-    }
-
-    footer p{
-        font-size:15px;
-        line-height:26px;
     }
 
 }

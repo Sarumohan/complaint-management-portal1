@@ -271,7 +271,7 @@ function Profile() {
 
                            src={`https://complaint-management-backend-xocq.onrender.com/uploads/${profilePhoto}`}
 
-                            alt="Profile"
+                            alt=""
 
                             style={{
                                 width:"140px",
