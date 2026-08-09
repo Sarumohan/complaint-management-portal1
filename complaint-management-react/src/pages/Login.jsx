@@ -59,11 +59,7 @@ function Login() {
             setMessageColor("green");
             setMessage(data.message);
 
-            setTimeout(() => {
-
-                navigate("/dashboard");
-
-            }, 1200);
+            navigate("/dashboard");
 
         }
 
