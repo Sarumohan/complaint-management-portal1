@@ -114,12 +114,14 @@ nav ul li a:hover{
 
     display:flex;
 
+    align-items:center;
+
     gap:15px;
 
 }
 
-.login,
-.register{
+.nav-buttons .login,
+.nav-buttons .register{
 
     display:flex;
 
@@ -130,6 +132,12 @@ nav ul li a:hover{
     width:170px;
 
     height:50px;
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
 
     text-decoration:none;
 
@@ -143,7 +151,7 @@ nav ul li a:hover{
 
 }
 
-.login{
+.nav-buttons .login{
 
     border:2px solid white;
 
@@ -153,7 +161,7 @@ nav ul li a:hover{
 
 }
 
-.login:hover{
+.nav-buttons .login:hover{
 
     background:white;
 
@@ -161,7 +169,7 @@ nav ul li a:hover{
 
 }
 
-.register{
+.nav-buttons .register{
 
     border:2px solid white;
 
@@ -171,7 +179,7 @@ nav ul li a:hover{
 
 }
 
-.register:hover{
+.nav-buttons .register:hover{
 
     background:#2563EB;
 
@@ -691,12 +699,14 @@ footer p{
 
     }
 
-    .login,
-    .register{
+    .nav-buttons .login,
+    .nav-buttons .register{
 
         width:220px;
 
         height:50px;
+
+        margin:0;
 
     }
 
