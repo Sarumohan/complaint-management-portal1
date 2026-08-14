@@ -150,7 +150,7 @@ function Profile() {
                     >
                         <img
                             src={currentImageSrc}
-                            alt="Profile"
+                            alt=" "
                             style={{
                                 width: "140px",
                                 height: "140px",
