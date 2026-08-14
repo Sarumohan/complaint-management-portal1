@@ -23,7 +23,7 @@ const getUserById = async (req, res) => {
 
     try {
 
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id).select("-password").lean();
 
         if (!user) {
 
@@ -149,7 +149,7 @@ const updateProfile = async (req, res) => {
 
             { new: true }
 
-        );
+        ).select("-password").lean();
 
         if (!user) {
 

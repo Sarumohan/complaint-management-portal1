@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import "../styles/complaint.css";
 
-function Profile() {
+const API = "https://complaint-management-backend-xocq.onrender.com";
 
-    const user = JSON.parse(
-        localStorage.getItem("loggedInUser")
-    );
+function Profile() {
 
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
@@ -14,422 +12,227 @@ function Profile() {
     const [address, setAddress] = useState("");
     const [profilePhoto, setProfilePhoto] = useState("profile.png");
     const [newPhoto, setNewPhoto] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+    const [messageColor, setMessageColor] = useState("green");
 
     useEffect(() => {
-
         loadProfile();
-
     }, []);
 
-    // async function loadProfile() {
-
-    //     try {
-
-    //         const response = await fetch(
-
-    //             `http://localhost:6990/users/${user._id}`
-
-    //         );
-
-    //         const data = await response.json();
-
-    //         setFullName(data.fullName);
-    //         setEmail(data.email);
-    //         setPhone(data.phone);
-    //         setAddress(data.address);
-
-    //         if (data.profilePhoto) {
-
-    //             setProfilePhoto(data.profilePhoto);
-
-    //         }
-
-    //     }
-
-    //     catch (error) {
-
-    //         console.log(error);
-
-    //     }
-
-    // }
     async function loadProfile() {
-
-    const loggedUser = JSON.parse(
-        localStorage.getItem("loggedInUser")
-    );
-
-    console.log(loggedUser);
-
-    try {
-
-        const response = await fetch(
-
-            `https://complaint-management-backend-xocq.onrender.com/users/${loggedUser._id}`
-
+        const loggedUser = JSON.parse(
+            localStorage.getItem("loggedInUser")
         );
 
-        console.log(response.status);
+        if (!loggedUser || !loggedUser._id) return;
 
-        const data = await response.json();
+        try {
+            const response = await fetch(
+                `${API}/users/${loggedUser._id}`
+            );
+            const data = await response.json();
 
-        console.log(data);
+            setFullName(data.fullName || "");
+            setEmail(data.email || "");
+            setPhone(data.phone || "");
+            setAddress(data.address || "");
 
-        setFullName(data.fullName);
-        setEmail(data.email);
-        setPhone(data.phone);
-        setAddress(data.address);
+            if (data.profilePhoto) {
+                setProfilePhoto(data.profilePhoto);
+            }
+        } catch (error) {
+            console.log("Error loading profile:", error);
+        }
+    }
 
-        if (data.profilePhoto) {
+    function handleFileChange(e) {
+        const file = e.target.files[0];
+        if (file) {
+            setNewPhoto(file);
+            setPreviewUrl(URL.createObjectURL(file));
+        }
+    }
 
-            setProfilePhoto(data.profilePhoto);
+    async function handleSubmit(e) {
+        e.preventDefault();
+        setMessage("");
 
+        const loggedUser = JSON.parse(
+            localStorage.getItem("loggedInUser")
+        );
+
+        if (!loggedUser || !loggedUser._id) return;
+
+        const formData = new FormData();
+        formData.append("fullName", fullName);
+        formData.append("phone", phone);
+        formData.append("address", address);
+
+        if (newPhoto) {
+            formData.append("profilePhoto", newPhoto);
         }
 
-    }
+        setLoading(true);
 
-    catch (error) {
+        try {
+            const response = await fetch(
+                `${API}/users/profile/${loggedUser._id}`,
+                {
+                    method: "PUT",
+                    body: formData
+                }
+            );
 
-        console.log(error);
+            const data = await response.json();
 
-    }
-
-}
-
-    // async function handleSubmit(e) {
-
-    //     e.preventDefault();
-
-    //     const formData = new FormData();
-
-    //     formData.append("fullName", fullName);
-    //     formData.append("phone", phone);
-    //     formData.append("address", address);
-
-    //     if (newPhoto) {
-
-    //         formData.append(
-    //             "profilePhoto",
-    //             newPhoto
-    //         );
-
-    //     }
-
-    //     try {
-
-    //       console.log("User ID:", user._id);
-
-    //       const url = `http://localhost:6990/users/${user._id}`;
-
-    //        console.log(url);
-
-    //        const response = await fetch(url, {
-    //          method: "PATCH",
-    //          body: formData
-    //         });
-
-    //         console.log("Status:", response.status);
-
-    //         const data = await response.json();
-
-    //         if(!response.ok){
-
-    //             alert(data.message);
-
-    //             return;
-
-    //         }
-
-    //         localStorage.setItem(
-
-    //             "loggedInUser",
-
-    //             JSON.stringify(data.user)
-
-    //         );
-
-    //         alert("Profile Updated Successfully");
-
-    //         loadProfile();
-
-    //     }
-
-    //     catch(error){
-
-    //         console.log(error);
-
-    //     }
-
-    // }
-    async function handleSubmit(e) {
-
-    e.preventDefault();
-
-    const loggedUser = JSON.parse(
-        localStorage.getItem("loggedInUser")
-    );
-
-    const formData = new FormData();
-
-    formData.append("fullName", fullName);
-    formData.append("phone", phone);
-    formData.append("address", address);
-
-    if (newPhoto) {
-
-        formData.append(
-            "profilePhoto",
-            newPhoto
-        );
-
-    }
-
-    try {
-
-        const response = await fetch(
-
-        `https://complaint-management-backend-xocq.onrender.com/users/profile/${loggedUser._id}`,
-
-            {
-
-                method: "PUT",
-
-                body: formData
-
+            if (!response.ok) {
+                setMessageColor("red");
+                setMessage(data.message || "Failed to update profile.");
+                return;
             }
 
-        );
+            localStorage.setItem(
+                "loggedInUser",
+                JSON.stringify(data.user)
+            );
 
-        const data = await response.json();
+            if (data.user && data.user.profilePhoto) {
+                setProfilePhoto(data.user.profilePhoto);
+            }
 
-        if (!response.ok) {
+            setNewPhoto(null);
+            setPreviewUrl(null);
+            setMessageColor("green");
+            setMessage("Profile updated successfully!");
 
-            alert(data.message);
-
-            return;
-
+        } catch (error) {
+            console.log("Error updating profile:", error);
+            setMessageColor("red");
+            setMessage("Something went wrong while updating profile.");
+        } finally {
+            setLoading(false);
         }
-
-        localStorage.setItem(
-
-            "loggedInUser",
-
-            JSON.stringify(data.user)
-
-        );
-
-        setProfilePhoto(data.user.profilePhoto);
-        setNewPhoto(null);
-
-        alert("Profile Updated Successfully");
-
-        loadProfile();
-
     }
 
-    catch (error) {
+    const currentImageSrc = previewUrl 
+        ? previewUrl 
+        : `${API}/uploads/${profilePhoto}?t=${Date.now()}`;
 
-        console.log(error);
-
-        alert("Something went wrong.");
-
-    }
-
-}
-
-    return(
-
+    return (
         <Layout>
-
             <section className="complaint-card">
-
                 <div className="heading">
-
-                    <h1>
-
-                        My Profile
-
-                    </h1>
-
-                    <p>
-
-                        View and update your personal information.
-
-                    </p>
-
+                    <h1>My Profile</h1>
+                    <p>View and update your personal information.</p>
                 </div>
 
-                <form onSubmit={handleSubmit}>                    <div
+                {message && (
+                    <div style={{
+                        color: messageColor,
+                        marginBottom: "15px",
+                        textAlign: "center",
+                        fontWeight: "600"
+                    }}>
+                        {message}
+                    </div>
+                )}
+
+                <form onSubmit={handleSubmit}>
+                    <div
                         style={{
-                            display:"flex",
-                            justifyContent:"center",
-                            marginBottom:"30px"
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            marginBottom: "30px"
                         }}
                     >
-
                         <img
-
-                           src={`https://complaint-management-backend-xocq.onrender.com/uploads/${profilePhoto}`}
-
-                            alt=""
-
+                            src={currentImageSrc}
+                            alt="Profile"
                             style={{
-                                width:"140px",
-                                height:"140px",
-                                borderRadius:"50%",
-                                objectFit:"cover",
-                                border:"4px solid #2563eb"
+                                width: "140px",
+                                height: "140px",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                                border: "4px solid #2563eb",
+                                boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
                             }}
-
                         />
-
+                        {previewUrl && (
+                            <span style={{ fontSize: "12px", color: "#2563eb", marginTop: "8px", fontWeight: "500" }}>
+                                Preview of selected image
+                            </span>
+                        )}
                     </div>
 
                     <div className="form-grid">
-
                         <div className="form-group">
-
-                            <label>
-
-                                Full Name
-
-                            </label>
-
+                            <label>Full Name</label>
                             <input
-
                                 type="text"
-
                                 value={fullName}
-
-                                onChange={(e)=>
-
-                                    setFullName(e.target.value)
-
-                                }
-
+                                onChange={(e) => setFullName(e.target.value)}
                             />
-
                         </div>
 
                         <div className="form-group">
-
-                            <label>
-
-                                Email Address
-
-                            </label>
-
+                            <label>Email Address</label>
                             <input
-
                                 type="email"
-
                                 value={email}
-
                                 readOnly
-
                             />
-
                         </div>
 
                         <div className="form-group">
-
-                            <label>
-
-                                Phone Number
-
-                            </label>
-
+                            <label>Phone Number</label>
                             <input
-
                                 type="text"
-
                                 value={phone}
-
-                                onChange={(e)=>
-
-                                    setPhone(e.target.value)
-
-                                }
-
+                                onChange={(e) => setPhone(e.target.value)}
                             />
-
                         </div>
 
                         <div className="form-group">
-
-                            <label>
-
-                                Address
-
-                            </label>
-
+                            <label>Address</label>
                             <input
-
                                 type="text"
-
                                 value={address}
-
-                                onChange={(e)=>
-
-                                    setAddress(e.target.value)
-
-                                }
-
+                                onChange={(e) => setAddress(e.target.value)}
                             />
-
                         </div>
-
                     </div>
 
                     <div className="form-group full">
-
-                        <label>
-
-                            Change Profile Photo
-
-                        </label>
-
+                        <label>Change Profile Photo</label>
                         <input
-
                             type="file"
-
                             accept="image/*"
-
-                            onChange={(e)=>
-
-                                setNewPhoto(e.target.files[0])
-
-                            }
-
+                            onChange={handleFileChange}
                         />
-
                     </div>
 
                     <div className="buttons">
-
                         <button
-
                             type="submit"
-
                             className="submit-btn"
-
+                            disabled={loading}
                         >
-
-                            Save Changes
-
+                            {loading ? (
+                                <span>
+                                    <i className="fa-solid fa-circle-notch fa-spin"></i> Saving Changes...
+                                </span>
+                            ) : (
+                                "Save Changes"
+                            )}
                         </button>
-
                     </div>
-
                 </form>
-
             </section>
-
         </Layout>
-
     );
-
 }
-//ui update
 
 export default Profile;
