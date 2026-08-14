@@ -15,6 +15,7 @@ function Login() {
 
     const [message, setMessage] = useState("");
     const [messageColor, setMessageColor] = useState("red");
+    const [loading, setLoading] = useState(false);
 
     async function handleSubmit(e) {
 
@@ -31,6 +32,8 @@ function Login() {
             return;
 
         }
+
+        setLoading(true);
 
         try {
 
@@ -69,6 +72,12 @@ function Login() {
 
             setMessageColor("red");
             setMessage("Unable to connect to server.");
+
+        }
+
+        finally {
+
+            setLoading(false);
 
         }
 
@@ -202,9 +211,16 @@ function Login() {
                             <button
                                 type="submit"
                                 className="login-btn"
+                                disabled={loading}
                             >
 
-                                Login
+                                {loading ? (
+                                    <span>
+                                        <i className="fa-solid fa-circle-notch fa-spin"></i> Logging in...
+                                    </span>
+                                ) : (
+                                    "Login"
+                                )}
 
                             </button>
 

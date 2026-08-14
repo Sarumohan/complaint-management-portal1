@@ -20,6 +20,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+app.get("/ping", (req, res) => {
+    res.status(200).send("OK");
+});
+
 app.use("/users", userRoute);
 app.use("/complaints", complaintRoute);
 

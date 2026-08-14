@@ -25,6 +25,8 @@ function Register() {
 
     const [messageColor, setMessageColor] = useState("red");
 
+    const [loading, setLoading] = useState(false);
+
     function handleChange(e){
 
         setFormData({
@@ -77,6 +79,8 @@ function Register() {
 
         }
 
+        setLoading(true);
+
         try{
 
             const response = await registerUser({
@@ -118,6 +122,12 @@ function Register() {
             console.log(error);
 
             setMessage("Unable to connect to server.");
+
+        }
+
+        finally {
+
+            setLoading(false);
 
         }
 
@@ -293,9 +303,17 @@ function Register() {
 
                         className="register-btn"
 
+                        disabled={loading}
+
                     >
 
-                        Create Account
+                        {loading ? (
+                            <span>
+                                <i className="fa-solid fa-circle-notch fa-spin"></i> Creating Account...
+                            </span>
+                        ) : (
+                            "Create Account"
+                        )}
 
                     </button>
 

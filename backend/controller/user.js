@@ -51,7 +51,7 @@ const registerUser = async (req, res) => {
 
         const existingUser = await User.findOne({
             email: req.body.email
-        });
+        }).select("_id").lean();
 
         if (existingUser) {
 
@@ -67,9 +67,12 @@ const registerUser = async (req, res) => {
 
         const user = await User.create(req.body);
 
+        const userObj = user.toObject();
+        delete userObj.password;
+
         res.status(201).json({
             message: "User Registered Successfully",
-            user
+            user: userObj
         });
 
     } catch (error) {
@@ -88,7 +91,7 @@ const loginUser = async (req, res) => {
 
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).lean();
 
         if (!user) {
 
@@ -110,6 +113,8 @@ const loginUser = async (req, res) => {
             });
 
         }
+
+        delete user.password;
 
         res.status(200).json({
             message: "Login Successful",

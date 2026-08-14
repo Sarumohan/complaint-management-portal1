@@ -45,3 +45,17 @@ export async function getUserComplaints(id) {
     return response;
 
 }
+
+export async function pingServer() {
+
+    try {
+
+        await fetch(`${API}/ping`);
+
+    } catch (error) {
+
+        console.log("Ping failed:", error);
+
+    }
+
+}

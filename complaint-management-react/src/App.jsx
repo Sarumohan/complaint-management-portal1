@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { pingServer } from "./services/api";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -12,6 +14,10 @@ import Notification from "./pages/Notification";
 
 
 function App() {
+
+    useEffect(() => {
+        pingServer();
+    }, []);
 
     return (
 
